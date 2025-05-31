@@ -1,0 +1,55 @@
+# Default values for etherpad.
+replicaCount: 1
+
+defaultTitle: "Labs Etherpad"
+defaultText: "✍️ Assign yourself a user and share your ideas! ✍️"
+
+image:
+  repository: etherpad
+  name:
+  tag:
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podSecurityContext: {}
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 9001
+
+ingress:
+  enabled: false
+  hosts:
+    - name: etherpad.organization.com
+  annotations: {}
+
+route:
+  enabled: true
+  host: null
+  targetPort: http
+
+resources:
+   limits:
+     cpu: 100m
+     memory: 128Mi
+   requests:
+     cpu: 100m
+     memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+persistence:
+  enabled: true
+  annotations: {}
+  storageClass:
+  accessMode: ReadWriteOnce
+  size: 1Gi
+  mountPath: /opt/etherpad-lite/var
