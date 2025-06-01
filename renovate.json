@@ -1,0 +1,37 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    "customManagers:githubActionsVersions",
+    "schedule:earlyMondays"
+  ],
+  "bumpVersion": "patch",
+  "hostRules": [
+    {
+      "matchHost": "https://registry.redhat.io",
+      "hostType": "docker",
+      "username": "6340056|redhat-cop-helm-charts",
+      "password": "{{ secrets.REDHAT_REGISTRY_TOKEN }}"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchPackageNames": [
+        "slsa-framework/slsa-github-generator"
+      ],
+      "pinDigests": false
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "quay.io/freeipa/freeipa-server"
+      ],
+      "pinDigests": false
+    }
+  ]
+}
